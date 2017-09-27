@@ -6,7 +6,7 @@ import urllib.request
 USERNAME = "kazukis2"
 PASSWORD = "u6MFDIFPgj"
 
-LOGIN_URL = "https://learn.illinois.edu/auth/shibboleth/gateway.php"
+LOGIN_URL = "https://shibboleth.illinois.edu/idp/profile/SAML2/Redirect/SSO;jsessionid=1714rugv4wx6d1j4pmh9f0otpr?execution=e1s1"
 URL = "https://learn.illinois.edu/grade/report/user/index.php?id=23714"
 def main():
     session_requests = requests.session()
@@ -16,8 +16,8 @@ def main():
     #authenticity_token = list(set(tree.xpath("//input[@name='authenticity_token']/@value")))[0]
 
     payload = {
-        "user_id": USERNAME, 
-        "password": PASSWORD, 
+        "j_username": USERNAME, 
+        "j_password": PASSWORD, 
     }
 
     result = session_requests.post(LOGIN_URL, data = payload, headers = dict(referer = LOGIN_URL))
@@ -27,8 +27,9 @@ def main():
     sauce = urllib.request.urlopen(URL).read()
     soup = bs.BeautifulSoup(sauce,'lxml')
     
-    #print(soup.encode("utf-8"))
+    for url in soup.find_all('h3'):
+        print(url)
     
-    
+
 if __name__ == '__main__':
     main()
