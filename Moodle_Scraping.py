@@ -6,7 +6,7 @@ import urllib.request
 USERNAME = "kazukis2"
 PASSWORD = "u6MFDIFPgj"
 
-LOGIN_URL = "https://shibboleth.illinois.edu/idp/profile/SAML2/Redirect/SSO;jsessionid=1714rugv4wx6d1j4pmh9f0otpr?execution=e1s1"
+LOGIN_URL = "https://www.lon-capa.illinois.edu/"
 URL = "https://learn.illinois.edu/grade/report/user/index.php?id=23714"
 def main():
     session_requests = requests.session()
@@ -17,7 +17,7 @@ def main():
 
     payload = {
         "j_username": USERNAME, 
-        "j_password": PASSWORD, 
+        "j_password": PASSWORD
     }
 
     result = session_requests.post(LOGIN_URL, data = payload, headers = dict(referer = LOGIN_URL))
